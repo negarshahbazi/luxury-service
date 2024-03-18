@@ -2,7 +2,30 @@
 
 {% block title %}Register
 {% endblock %}
-
+{% block stylesheets %}
+  <style>
+        .page-title-bg {
+            background-image: url(../../assets/img/bg3.jpg);
+        }
+        .log-section form .checkbox label {
+            font-size: 16px
+        }
+        .log-section form .checkbox label a {
+            color: #b6a575;
+            text-decoration: underline;
+            text-transform: inherit;
+            font-size: 16px
+        }
+        .log-section form .links a {
+            display: block;
+            text-align: center;
+            color: #b6a575;
+            text-decoration: underline;
+            text-transform: inherit;
+            font-size: 16px
+        }
+    </style>
+	{% endblock %}
 {% block body %}
 	<h1>Register</h1>
 
@@ -51,7 +74,16 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-6 col-sm-offset-3 card card-panel">
 							<h3 class="text-extrabold">Create a new account</h3>
-							{{ form_errors(registrationForm) }}
+							{{ form_errors(registrationForm, {
+								'attr': {
+									'id' : 'register-form',
+									'role':'form',
+									'accept-char':'UTF-8',
+									'autocomplete':'off',
+									'data-parsley-validate':true,
+								}
+							}) }}
+                            {# <form id="register-form" role="form" method="post" accept-char="UTF-8" autocomplete="off" data-parsley-validate> #}
 
 							{{ form_start(registrationForm) }}
 
@@ -60,12 +92,12 @@
 								{{ form_row(registrationForm.email) }}
 							</div>
 							<div class="input-field">
-								{{ form_row(registrationForm.plainPassword, { label: 'Password'}) }}
+								{{ form_row(registrationForm.plainPassword) }}
 								<i class="fa fa-eye show-password"></i>
 							</div>
 							<div
 								class="input-field">
-								{# {{ form_row(registrationForm.password.second, {label: 'Password'}) }} #}
+								{# {{ form_row(registrationForm.password.second) }} #}
 								<span class="help-block">Confirm your password.</span>
 							</div>
 

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidats index{% endblock %}
+
+{% block body %}
+    <h1>Candidats index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Address</th>
+                <th>Country</th>
+                <th>Nationalite</th>
+                <th>BirthDate</th>
+                <th>BirthPlace</th>
+                <th>CurrentLocation</th>
+                <th>Disponibilite</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidat in candidats %}
+            <tr>
+                <td>{{ candidat.id }}</td>
+                <td>{{ candidat.firstName }}</td>
+                <td>{{ candidat.lastName }}</td>
+                <td>{{ candidat.address }}</td>
+                <td>{{ candidat.country }}</td>
+                <td>{{ candidat.nationalite }}</td>
+                <td>{{ candidat.birthDate ? candidat.birthDate|date('Y-m-d') : '' }}</td>
+                <td>{{ candidat.birthPlace }}</td>
+                <td>{{ candidat.currentLocation }}</td>
+                
+                <td>{{ candidat.description }}</td>
+                <td>
+                    <a href="{{ path('app_candidats_show', {'id': candidat.id}) }}">show</a>
+                    <a href="{{ path('app_candidats_edit', {'id': candidat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% if app.user %}
+    <a href="{{ path('app_candidats_edit', {id: app.user.id}) }}">Create new</a>
+    {% endif %}
+{% endblock %}

@@ -2,6 +2,16 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Candidats;
+use App\Entity\Candidatures;
+use App\Entity\Category;
+use App\Entity\Company;
+use App\Entity\ContractType;
+use App\Entity\Experience;
+use App\Entity\Gender;
+use App\Entity\JobOffer;
+use App\Entity\Media;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -29,7 +39,7 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-         return $this->render('admin/dashboard.html.twig');
+         return $this->render('/admin/dashboard.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -41,6 +51,18 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        //  yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Manage company', 'fa-solid fa-building', Company::class);
+        yield MenuItem::linkToCrud('Manage joboffer', 'fa-brands fa-creative-commons-nd', JobOffer::class);
+        yield MenuItem::linkToCrud('Manage candidats', 'fa-solid fa-person', Candidats::class);
+        yield MenuItem::linkToCrud('Manage candidatures', 'fas fa-list', Candidatures::class);
+        yield MenuItem::linkToCrud('Manage user', 'fa-solid fa-user', User::class);
+        yield MenuItem::linkToCrud('Manage category', 'fa-solid fa-list', Category::class);
+        yield MenuItem::linkToCrud('Manage contracttype', 'fa-solid fa-file-contract', ContractType::class);
+        yield MenuItem::linkToCrud('Manage experience', 'fas fa-list', Experience::class);
+        yield MenuItem::linkToCrud('Manage gender', 'fa-solid fa-venus-mars', Gender::class);
+        yield MenuItem::linkToCrud('Manage media', 'fa-solid fa-photo-film', Media::class);
+
+        
+
     }
 }

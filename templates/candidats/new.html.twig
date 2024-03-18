@@ -1,0 +1,103 @@
+{# <a href="{{ path('app_candidats_index') }}">back to list</a> #}
+{% extends 'base.html.twig' %}
+{% block meta %}
+	<meta name="base_url" content="http://www.fgtechs.fr/z-pedro/wwwluxuryservices">
+	<meta
+	name="csrf-token" content="9Tnm0YBCxgVTxoqI1HzccsU5NuE9RughZmhpzgXn">
+	<!--  favicon -->
+	<link rel="shortcut icon" href="assets/img/ico/fav.png">
+
+
+{% endblock %}
+{% block stylesheets %}
+
+	<style>
+		select {
+			display: block !important;
+		}
+	</style>
+{% endblock %}
+{% block body %}
+
+	<div
+		class="base">
+
+		<!-- Page -->
+		<div
+			class="page">
+
+			<!-- Page Header-->
+			<section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="white-text">Your profile</h2>
+							<span class="white-text">Personnal & Professionnal informations</span>
+							<ol class="breadcrumb">
+								<li>
+									<a href="{{ path('app_home') }}">Home</a>
+								</li>
+								<li class="active">Profile</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- Page Content-->
+			<section class="gray-bg">
+				<div class="container">
+					<div class="row">
+						<div class="score-container">
+								 {% if (candidat.percentCompleted == 100) %} 
+								<h4>
+
+									<img src="{{ asset('assets/img/s9bPVaK.gif') }}" style="height: 80px; width: 201px;">
+									&nbsp;
+									&nbsp; Hooray ! Your profile is complete.
+								</h4>
+								<div class="c100 p100 small complete ">
+									<span>100%</span>
+									<div class="slice">
+										<div class="bar"></div>
+										<div class="fill"></div>
+									</div>
+								</div>
+							{% else %} 
+								 <h4>
+									&nbsp; Complete 100% of your profile to apply for offers !
+								</h4>
+								<div class="c100 p100 small complete ">
+									<span>{{ candidat.percentCompleted }}%</span>
+									<div class="slice">
+										<div class="bar"></div>
+										<div class="fill"></div>
+									</div>
+								</div> 
+							 {% endif %}
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</section>
+
+			{{ include('candidats/_form.html.twig') }}
+
+
+		</div>
+
+	</div>
+
+
+	{% block javascripts %}
+
+		 <script type="text/javascript">
+						
+						    onAppReady(function() {
+						        $('.preload').remove();
+						    });
+						</script>
+
+	{% endblock %}
+{% endblock %}

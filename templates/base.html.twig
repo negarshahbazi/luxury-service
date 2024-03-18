@@ -16,10 +16,8 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="idmkr.io">
-    <meta name="base_url" content="https://assets-luxury.projets.garage404.com">
-    <meta name="csrf-token" content="utSEZUUxgneXBCQY5My9Djz8rVhqLiG7PLq3ThDA">
-    <!--  favicon -->
-    <link rel="shortcut icon" href="assets/img/luxury-services-logo.png">
+   {% block meta %}
+{% endblock %}
 
     <script>
         window.isMobile = (function() {
@@ -35,7 +33,9 @@
     </script>
 
 
+{% block stylesheets %}
 
+{% endblock %}
 
     <link href="/assets/css/main.css" rel="stylesheet">
 
@@ -113,13 +113,30 @@
                                 <li><a href="{{ path('app_about') }}">About Us</a></li>
                                 <li><a href="{{ path('app_contact') }}">Contact</a></li>
                                 <li>-</li>
-                                <li><a href="{{ path('app_profil') }}">Profile</a></li>
-                                <li><a href="/logout.html">Logout</a></li>
+                                {% if app.user %}
+                                <li><a href="{{ path('app_candidats_edit', {id : app.user.id}) }}">Profile</a></li>
+                                <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                                {% endif %}
                             </ul>
                         </nav>
                     </div>
                 </div>
                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    {% if app.user %}
+                    <ul class="menuzord-menu pull-right light" role="navigation">
+                        <li class=" dropdown">
+                            <a target="_self" href="{{ path('app_candidats_edit', {id: app.user.id}) }}">
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li class=" dropdown">
+                            <a target="_self" href="{{ path('app_logout') }}" class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register">
+                                <span>Logout</span>
+                            </a>
+
+                        </li>
+                    </ul>
+                    {% else %}
                     <ul class="menuzord-menu pull-right light" role="navigation">
                         <li class=" dropdown">
                             <a target="_self" href="{{ path('app_login') }}">
@@ -133,6 +150,7 @@
 
                         </li>
                     </ul>
+                    {% endif %}
                     <ul class="menuzord-menu pull-right light" role="navigation">
                         <li class="active dropdown">
                             <a target="_self" href="{{ path('app_home') }}">
